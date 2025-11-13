@@ -9,16 +9,13 @@ import pyautogui
 import pygetwindow as gw
 
 async def run(message: discord.Message, args, client: discord.Client):
-    #return
     if not globals.get_user_from_id(message.author.id).has_permission("EXEC"):
         print("denied")
         return
     
-    if message.content.__contains__("token") : #or message.content.__contains__("press") or message.content.__contains__("keyDown") or message.content.__contains__("type")
+    if "token" in message.content: 
         await message.reply("fuck off")
         return
-    
-    if message.content.__contains__(".title"): return
 
     code = " ".join(args)
     exec_globals = {"message": message, "client": client, 

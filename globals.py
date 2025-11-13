@@ -10,6 +10,8 @@ client:discord.Client = None
 users:list[User] = None
 disabled_commands:list[str] = []
 
+kevin_globals:dict = {} 
+
 def get_user_from_name(username:str):
     for user in users:
         if user.name == username:

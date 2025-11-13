@@ -3,6 +3,7 @@ import discord
 import globals
 from globals import PREFIX
 
+import asyncio
 import importlib
 import os
 import random
@@ -113,8 +114,23 @@ def read_token():
         
     return "oops"
 
-
 intents = discord.Intents.all() # IM LAZY TODO ACTUAL INTENTS
-
 client = Phil(intents=intents)
-client.run(read_token())
+globals.client = client
+
+# -= -- loop -- =- #
+async def main():
+    try:
+        await client.start(read_token())
+    except KeyboardInterrupt:
+        print("ahhhh")
+    finally:
+        print("quitting")
+
+        await broadcast("on_exit")
+        await client.close()
+
+        exit()
+
+if __name__ == "__main__":
+    asyncio.run(main())
