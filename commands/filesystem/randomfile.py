@@ -1,6 +1,8 @@
 import discord
 import globals
 
+from utils import fileutil
+
 from classes.uploads.file import File
 
 import random
@@ -43,6 +45,4 @@ async def run(message: discord.Message, args: list[str], client: discord.Client 
         await message.channel.send(f"the following users were invalid and skipped: {', '.join(skipped_users)}")
 
     file = random.choice(file_list)
-
-    async with message.channel.typing():
-        await message.channel.send(f"filename: {file.name_with_ext} | uploader: {file.owner.discord_user.display_name} ({file.owner.name})", file=discord.File(file.path))
+    await fileutil.send_file_formatted(message.channel, file)

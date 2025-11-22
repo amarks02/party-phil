@@ -12,16 +12,7 @@ FILES_PER_PAGE = 11
 LEFT_EMOJI = "⬅️"
 RIGHT_EMOJI = "➡️"
 
-# https://stackoverflow.com/a/59634071
-UNITS = {1000: ['KB', 'MB', 'GB'],
-            1024: ['KiB', 'MiB', 'GiB']}
-
-def approximate_size(size, use_base_1024=False):
-    mult = 1024 if use_base_1024 else 1000
-    for unit in UNITS[mult]:
-        size = size / mult
-        if size < mult:
-            return '{0:.3f} {1}'.format(size, unit)
+from utils.fileutil import approximate_size
 
 class Buttons(discord.ui.View):
     def __init__(self, callbackleft, callbackright, owner:discord.User, max_pages:int, timeout=30):
